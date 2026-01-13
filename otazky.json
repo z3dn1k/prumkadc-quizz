@@ -1,282 +1,232 @@
 {
   "ELT": [
     {
-      "tema": "Zesilovače",
-      "otazka": "Jak definujeme elektronický zesilovač?",
+      "tema": "Výkonová elektronika",
+      "otazka": "Jaká je hlavní vlastnost tyristoru v stejnosměrném obvodu?",
       "moznosti": [
-        "Zařízení, které mění střídavý proud na stejnosměrný.",
-        "Aktivní zařízení, které zesiluje signál o nižším výkonu na signál o vyšším výkonu.",
-        "Pasivní obvod pro filtraci signálu.",
-        "Zdroj elektrického napětí."
+        "Lze ho vypnout přivedením proudu na řídicí elektrodu.",
+        "Po sepnutí zůstává vodivý i po zániku řídicího pulsu, dokud proud neklesne pod přídržnou hodnotu.",
+        "Chová se jako lineární zesilovač signálu.",
+        "Vede proud oběma směry bez nutnosti řízení."
       ],
       "spravna_index": 1,
-      "odpoved": "Je to aktivní zařízení, které zvyšuje výkon signálu na úkor energie z napájecího zdroje."
+      "odpoved": "Tyristor je v DC obvodu 'bistabilní' – po sepnutí zůstane otevřený, dokud není proudový obvod přerušen."
     },
     {
-      "tema": "Zesilovače",
-      "otazka": "Která třída zesilovače má nejvyšší účinnost?",
+      "tema": "Výkonová elektronika",
+      "otazka": "K čemu se nejčastěji používá triak?",
       "moznosti": [
-        "Třída A",
-        "Třída B",
-        "Třída AB",
-        "Třída D"
-      ],
-      "spravna_index": 3,
-      "odpoved": "Třída D (spínaná) má nejvyšší účinnost (až 90+ %), protože tranzistory pracují jen ve stavech sepnuto/rozepnuto."
-    },
-    {
-      "tema": "Zesilovače",
-      "otazka": "Vlastnosti zapojení se Společným Emitorem (SE):",
-      "moznosti": [
-        "Neinvertuje fázi, zesílení < 1.",
-        "Invertuje fázi o 180°, zesiluje napětí i proud.",
-        "Má nekonečný vstupní odpor.",
-        "Používá se jen jako proudový buffer."
-      ],
-      "spravna_index": 1,
-      "odpoved": "SE je nejpoužívanější, otáčí fázi o 180° a má dobré napěťové i proudové zesílení."
-    },
-    {
-      "tema": "Zesilovače",
-      "otazka": "Jaké vlastnosti má zapojení se Společným Kolektorem (SC)?",
-      "moznosti": [
-        "Velké napěťové zesílení.",
-        "Zesílení napětí menší než 1, velký vstupní odpor, malý výstupní odpor.",
-        "Invertuje fázi o 180 stupňů.",
-        "Používá se pro zesílení velmi vysokých frekvencí."
-      ],
-      "spravna_index": 1,
-      "odpoved": "Zapojení SC (Emitorový sledovač) má napěťové zesílení cca 1, ale zesiluje proud. Slouží jako impedanční přizpůsobení."
-    },
-    {
-      "tema": "Zesilovače",
-      "otazka": "Co způsobuje záporná zpětná vazba (ZZV)?",
-      "moznosti": [
-        "Zvyšuje zesílení a zkreslení.",
-        "Snižuje zesílení, ale zlepšuje stabilitu a linearitu.",
-        "Způsobí rozkmitání zesilovače.",
-        "Mění tranzistor na diodu."
-      ],
-      "spravna_index": 1,
-      "odpoved": "ZZV stabilizuje parametry, snižuje zkreslení a šum, ale za cenu nižšího celkového zesílení."
-    },
-    {
-      "tema": "Operační zesilovače",
-      "otazka": "Jaký je vstupní odpor ideálního operačního zesilovače?",
-      "moznosti": [
-        "Nulový",
-        "50 Ohmů",
-        "Nekonečně velký",
-        "Závisí na napájení"
+        "Pro usměrnění vysokofrekvenčních signálů.",
+        "Jako stabilizátor napětí.",
+        "Pro spínání a regulaci střídavého proudu (např. stmívače, regulace motorů).",
+        "Pro generování rádiových vln."
       ],
       "spravna_index": 2,
-      "odpoved": "Ideální OZ má nekonečný vstupní odpor (do vstupů neteče žádný proud)."
+      "odpoved": "Triak je spínací prvek schopný vést proud oběma směry, proto je ideální pro regulaci střídavých výkonů."
     },
     {
-      "tema": "Operační zesilovače",
-      "otazka": "Vztah pro zesílení invertujícího zesilovače je:",
+      "tema": "Lineární zdroje - Transformátory",
+      "otazka": "Jaká je funkce síťového transformátoru v lineárním zdroji?",
       "moznosti": [
-        "Au = 1 + (R2 / R1)",
-        "Au = - (R2 / R1)",
-        "Au = R1 * R2",
-        "Au = R1 / (R1 + R2)"
+        "Mění střídavé napětí na stejnosměrné.",
+        "Zajišťuje galvanické oddělení a transformaci velikosti napětí.",
+        "Vyhlazuje zvlnění napětí.",
+        "Stabilizuje výstupní napětí."
       ],
       "spravna_index": 1,
-      "odpoved": "U invertujícího zapojení je zesílení záporné (otáčí fázi) a je dáno poměrem R2/R1."
+      "odpoved": "Transformátor galvanicky odděluje obvod od sítě a mění amplitudu napětí podle převodního poměru."
     },
     {
-      "tema": "Operační zesilovače",
-      "otazka": "Vztah pro zesílení NEinvertujícího zesilovače je:",
+      "tema": "Lineární zdroje - Usměrňovače",
+      "otazka": "Jakou frekvenci má zvlnění na výstupu dvoucestného usměrňovače (při síťové frekvenci 50 Hz)?",
       "moznosti": [
-        "Au = 1 + (R2 / R1)",
-        "Au = - (R2 / R1)",
-        "Au = R2 / R1",
-        "Au = 1"
-      ],
-      "spravna_index": 0,
-      "odpoved": "Neinvertující zesilovač má zesílení vždy větší nebo rovno 1."
-    },
-    {
-      "tema": "Operační zesilovače",
-      "otazka": "Co je to komparátor?",
-      "moznosti": [
-        "Obvod pro sčítání napětí.",
-        "Obvod, který porovnává dvě napětí a výstup je v saturaci.",
-        "Zesilovač s přesným ziskem 10.",
-        "Obvod pro násobení frekvence."
-      ],
-      "spravna_index": 1,
-      "odpoved": "Komparátor porovnává U+ a U-. Výstup je buď kladná nebo záporná saturace."
-    },
-    {
-      "tema": "Generátory",
-      "otazka": "Co musí splňovat oscilátor, aby kmital (Barkhausenova podmínka)?",
-      "moznosti": [
-        "Zesílení < 1",
-        "Zesílení smyčky ≥ 1 a fázový posuv násobkem 360°",
-        "Musí mít cívku",
-        "Musí být chlazený"
-      ],
-      "spravna_index": 1,
-      "odpoved": "Pro vznik oscilací musí být přenos otevřené smyčky alespoň 1 a signál se musí vracet ve fázi."
-    },
-    {
-      "tema": "Generátory",
-      "otazka": "Který obvod se používá pro generování sinusového signálu v NF oblasti?",
-      "moznosti": [
-        "Wienův článek",
-        "Astabilní klopný obvod",
-        "Hradlo NAND",
-        "Derivační článek"
-      ],
-      "spravna_index": 0,
-      "odpoved": "Wienův článek je selektivní RC článek používaný v RC oscilátorech."
-    },
-    {
-      "tema": "Generátory",
-      "otazka": "Co je to metoda DDS?",
-      "moznosti": [
-        "Direct Digital Synthesis - digitální generování signálu.",
-        "Double Diode System - usměrňovač.",
-        "Dynamic Drive System - řízení motoru.",
-        "Digital Delay System - zpožďovací linka."
-      ],
-      "spravna_index": 0,
-      "odpoved": "DDS generuje signál čtením vzorků z paměti a převodem přes D/A převodník."
-    },
-    {
-      "tema": "Generátory",
-      "otazka": "Schmittův klopný obvod je:",
-      "moznosti": [
-        "Zesilovač třídy A.",
-        "Komparátor s hysterezí.",
-        "Lineární stabilizátor.",
-        "Filtr dolní propusti."
-      ],
-      "spravna_index": 1,
-      "odpoved": "Schmittův KO má dvě rozhodovací úrovně, což zavádí hysterezi a odolnost proti šumu."
-    }
-  ],
-  "ELM": [
-    {
-      "tema": "Principy ZAE",
-      "otazka": "Co říká Theveninova věta?",
-      "moznosti": [
-        "Součet proudů v uzlu je nula.",
-        "Aktivní dvojpól lze nahradit zdrojem napětí a sériovým odporem.",
-        "Aktivní dvojpól lze nahradit zdrojem proudu a paralelním odporem.",
-        "U = R * I"
-      ],
-      "spravna_index": 1,
-      "odpoved": "Theveninův náhradní obvod se skládá z ideálního zdroje napětí Ui a vnitřního odporu Ri."
-    },
-    {
-      "tema": "Principy ZAE",
-      "otazka": "Princip superpozice platí:",
-      "moznosti": [
-        "Pouze v nelineárních obvodech.",
-        "Pouze v lineárních obvodech.",
-        "Všude.",
-        "Pouze pro střídavý proud."
-      ],
-      "spravna_index": 1,
-      "odpoved": "Superpozice (sčítání účinků zdrojů) platí pouze v lineárních obvodech."
-    },
-    {
-      "tema": "Logické funkce",
-      "otazka": "Výstup hradla AND je 1, pokud:",
-      "moznosti": [
-        "Alespoň jeden vstup je 1.",
-        "Všechny vstupy jsou 1.",
-        "Všechny vstupy jsou 0.",
-        "Vstupy se nerovnají."
-      ],
-      "spravna_index": 1,
-      "odpoved": "AND je logický součin, vyžaduje 1 na všech vstupech."
-    },
-    {
-      "tema": "Logické funkce",
-      "otazka": "Jaký je výstup hradla NOR, pokud jsou oba vstupy 0?",
-      "moznosti": [
-        "Logická 0",
-        "Logická 1",
-        "Stav vysoké impedance",
-        "Nedefinovaný"
-      ],
-      "spravna_index": 1,
-      "odpoved": "NOR je negovaný součet (0+0=0, negace je 1). V ostatních případech je výstup 0."
-    },
-    {
-      "tema": "Logické funkce",
-      "otazka": "De Morganův zákon pro negaci součinu:",
-      "moznosti": [
-        "neg(A.B) = negA + negB",
-        "neg(A.B) = negA . negB",
-        "neg(A.B) = A + B",
-        "neg(A.B) = A . B"
-      ],
-      "spravna_index": 0,
-      "odpoved": "Negace součinu se rovná součtu negací."
-    },
-    {
-      "tema": "Rezonance",
-      "otazka": "Co platí pro sériový RLC obvod při rezonanci?",
-      "moznosti": [
-        "Impedance je maximální.",
-        "Impedance je nulová.",
-        "Impedance je minimální (R), proud je maximální.",
-        "Napětí na cívce je nulové."
+        "25 Hz",
+        "50 Hz",
+        "100 Hz",
+        "0 Hz (čisté DC)"
       ],
       "spravna_index": 2,
-      "odpoved": "Při sériové rezonanci se vyruší reaktance XL a XC, zůstává jen činný odpor R."
+      "odpoved": "Dvoucestný usměrňovač (Graetzův můstek nebo uzlový) využívá obě půlvlny, proto je frekvence pulzů dvojnásobná (2 × 50 Hz = 100 Hz)."
     },
     {
-      "tema": "Rezonance",
-      "otazka": "Co je to rezonanční převýšení?",
+      "tema": "Lineární zdroje - Usměrňovače",
+      "otazka": "Kolik diod obsahuje Graetzův můstek?",
       "moznosti": [
-        "Zvýšení odporu v obvodu.",
-        "Jev, kdy napětí na L a C je vyšší než napětí zdroje.",
-        "Zvýšení frekvence nad rezonanční kmitočet.",
-        "Chyba měření."
-      ],
-      "spravna_index": 1,
-      "odpoved": "Činitel jakosti Q udává, kolikrát je napětí na akumulačních prvcích vyšší než napětí zdroje."
-    },
-    {
-      "tema": "Měření odporu",
-      "otazka": "Jaká metoda měření odporu je nejpřesnější?",
-      "moznosti": [
-        "Ohmova metoda",
-        "Srovnávací metoda",
-        "Můstková metoda",
-        "Měření multimetrem"
+        "1 diodu",
+        "2 diody",
+        "4 diody",
+        "6 diod"
       ],
       "spravna_index": 2,
-      "odpoved": "Můstkové metody (např. Wheatstoneův můstek) jsou nejpřesnější nulové metody."
+      "odpoved": "Graetzův můstek je zapojení 4 diod do můstku pro dvoucestné usměrnění bez nutnosti vyvedeného středu vinutí transformátoru."
     },
     {
-      "tema": "Měření indukčnosti",
-      "otazka": "Jak ovlivní feromagnetické jádro indukčnost cívky?",
+      "tema": "Lineární stabilizátory",
+      "otazka": "Jaký je nejjednodušší typ stabilizátoru napětí?",
       "moznosti": [
-        "Indukčnost se sníží.",
-        "Indukčnost se nezmění.",
-        "Indukčnost se výrazně zvýší.",
-        "Cívka přestane vodit."
-      ],
-      "spravna_index": 2,
-      "odpoved": "Jádro s vysokou permeabilitou násobí magnetický tok a tím výrazně zvyšuje indukčnost."
-    },
-    {
-      "tema": "Kapacita",
-      "otazka": "Rozdíl mezi dielektrikem a izolací:",
-      "moznosti": [
-        "Žádný, je to totéž.",
-        "Izolant jen izoluje, dielektrikum se polarizuje a uchovává náboj.",
-        "Dielektrikum vede proud, izolace ne.",
-        "Izolace se používá jen u cívek."
+        "Stabilizátor s operačním zesilovačem.",
+        "Parametrický stabilizátor se Zenerovou diodou.",
+        "Spínaný zdroj typu Step-Up.",
+        "Monostabilní klopný obvod."
       ],
       "spravna_index": 1,
-      "odpoved": "Hlavní funkcí dielektrika v kondenzátoru je polarizace a zvýšení kapacity."
+      "odpoved": "Nejjednodušším obvodem je parametrický stabilizátor, který využívá Zenerovu diodu zapojenou v závěrném směru v sérii s omezovacím rezistorem."
+    },
+    {
+      "tema": "Lineární stabilizátory",
+      "otazka": "Z jakých hlavních částí se skládá zpětnovazební stabilizátor?",
+      "moznosti": [
+        "Pouze z transformátoru a usměrňovače.",
+        "Z cívky, kondenzátoru a spínače.",
+        "Ze zdroje referenčního napětí, porovnávacího členu (zesilovače) a regulačního členu.",
+        "Z generátoru PWM a tranzistoru."
+      ],
+      "spravna_index": 2,
+      "odpoved": "Zpětnovazební stabilizátor porovnává výstupní napětí s referenčním zdrojem a regulační člen (tranzistor) následně upraví napětí."
+    },
+    {
+      "tema": "Lineární stabilizátory",
+      "otazka": "Jaká je hlavní nevýhoda lineárních stabilizátorů při velkém rozdílu vstupního a výstupního napětí?",
+      "moznosti": [
+        "Vytváří velké rušení.",
+        "Mají velmi nízkou účinnost a přebytečný výkon se mění na teplo.",
+        "Jsou příliš složité na zapojení.",
+        "Mají pomalou odezvu."
+      ],
+      "spravna_index": 1,
+      "odpoved": "Lineární stabilizátory fungují jako proměnný odpor, takže rozdíl napětí při daném proudu se maří na teplo, což vede k malé účinnosti."
+    },
+    {
+      "tema": "Integrované stabilizátory",
+      "otazka": "Co určuje řada integrovaných obvodů 78xx (např. 7805)?",
+      "moznosti": [
+        "Záporné stabilizované napětí.",
+        "Kladné stabilizované napětí (např. 5V).",
+        "Nastavitelné napětí.",
+        "Spínaný zdroj proudu."
+      ],
+      "spravna_index": 1,
+      "odpoved": "Řada 78xx jsou monolitické stabilizátory kladného napětí (xx udává hodnotu napětí), zatímco 79xx jsou pro záporné napětí."
+    },
+    {
+      "tema": "Integrované stabilizátory",
+      "otazka": "K čemu slouží integrovaný obvod LM317?",
+      "moznosti": [
+        "Je to stabilizátor pevného napětí 12V.",
+        "Je to nastavitelný stabilizátor kladného napětí.",
+        "Je to řídicí obvod pro spínané zdroje.",
+        "Je to usměrňovací dioda."
+      ],
+      "spravna_index": 1,
+      "odpoved": "LM317 je třísvorkový nastavitelný stabilizátor, kde se výstupní napětí (od 1,2V výše) nastavuje pomocí dvou externích rezistorů."
+    },
+    {
+      "tema": "Spínané zdroje - Principy",
+      "otazka": "Co je hlavní výhodou spínaných zdrojů oproti lineárním?",
+      "moznosti": [
+        "Jednodušší konstrukce bez rušení.",
+        "Vysoká účinnost (často nad 80-90 %).",
+        "Absence cívky v obvodu.",
+        "Nižší počet součástek."
+      ],
+      "spravna_index": 1,
+      "odpoved": "Spínané zdroje mají vysokou účinnost, protože tranzistor pracuje ve spínacím režimu (malá ztráta výkonu)."
+    },
+    {
+      "tema": "Spínané zdroje - Principy",
+      "otazka": "Co je principem regulace u spínaných zdrojů?",
+      "moznosti": [
+        "Změna odporu tranzistoru v lineární oblasti.",
+        "Změna poměru doby sepnutí a rozepnutí spínače (střídy).",
+        "Změna kapacity výstupního kondenzátoru.",
+        "Změna frekvence sítě."
+      ],
+      "spravna_index": 1,
+      "odpoved": "Regulace se provádí změnou střídy (Duty Cycle), tedy poměrem doby, kdy je spínač sepnut, k celkové periodě."
+    },
+    {
+      "tema": "Spínané zdroje - Principy",
+      "otazka": "Která součástka ve spínaném zdroji slouží k akumulaci energie v magnetickém poli?",
+      "moznosti": [
+        "Rezistor",
+        "Tlumivka (cívka)",
+        "Dioda",
+        "Termistor"
+      ],
+      "spravna_index": 1,
+      "odpoved": "Tlumivka je klíčová pro akumulaci energie během doby sepnutí tranzistoru a její vydávání během doby rozepnutí."
+    },
+    {
+      "tema": "Spínané zdroje - Step-Down",
+      "otazka": "Jak funguje měnič typu Step-Down (znižující)?",
+      "moznosti": [
+        "Výstupní napětí je vyšší než vstupní.",
+        "Výstupní napětí je nižší než vstupní (U2 < U1).",
+        "Mění polaritu výstupního napětí.",
+        "Slouží pouze jako izolace."
+      ],
+      "spravna_index": 1,
+      "odpoved": "Step-Down (blokující měnič) snižuje napětí. Doba sepnutí tranzistoru určuje, kolik energie se přenese na výstup."
+    },
+    {
+      "tema": "Spínané zdroje - Step-Down",
+      "otazka": "Jakou funkci má nulová dioda v měniči Step-Down?",
+      "moznosti": [
+        "Usměrňuje vstupní napětí ze sítě.",
+        "Zvyšuje napětí na výstupu.",
+        "Umožňuje průchod proudu cívkou do zátěže v době, kdy je tranzistor rozepnutý.",
+        "Chrání tranzistor před přehřátím."
+      ],
+      "spravna_index": 2,
+      "odpoved": "Když tranzistor rozepne, cívka se snaží udržet tok proudu. Dioda tento obvod uzavře a umožní energii z cívky téct do zátěže."
+    },
+    {
+      "tema": "Spínané zdroje - Step-Up",
+      "otazka": "Co je principem měniče Step-Up (zvyšující)?",
+      "moznosti": [
+        "Při rozepnutí tranzistoru se indukované napětí na cívce sečte s napětím zdroje.",
+        "Používá transformátor pro snížení napětí.",
+        "Trvale zkratuje vstupní zdroj.",
+        "Funguje pouze na střídavý proud."
+      ],
+      "spravna_index": 0,
+      "odpoved": "U Step-Up měniče vzniká při rozepnutí spínače na cívce napětí téže polarity jako zdroj, čímž se napětí sčítají a zvyšují výstup."
+    },
+    {
+      "tema": "Spínané zdroje - Invertující",
+      "otazka": "Jaký je vztah mezi vstupním a výstupním napětím u invertujícího měniče?",
+      "moznosti": [
+        "U výstupu je vždy vyšší než U vstupu.",
+        "U výstupu má opačnou polaritu než U vstupu.",
+        "U výstupu je rovno U vstupu.",
+        "Tento měnič neexistuje."
+      ],
+      "spravna_index": 1,
+      "odpoved": "Invertující měnič vytváří napětí opačné polarity oproti vstupnímu napětí (např. z +12V udělá -5V)."
+    },
+    {
+      "tema": "Spínané zdroje - Řízení",
+      "otazka": "Co znamená zkratka PWM při řízení spínaných zdrojů?",
+      "moznosti": [
+        "Power Watt Management",
+        "Pulse Width Modulation (Pulsně šířková modulace)",
+        "Phase Wave Motion",
+        "Positive Wire Measurement"
+      ],
+      "spravna_index": 1,
+      "odpoved": "PWM reguluje výstupní napětí změnou šířky impulsu (střídy) při konstantní frekvenci."
+    },
+    {
+      "tema": "Spínané zdroje - Řízení",
+      "otazka": "Který parametr se mění při pulzně šířkové modulaci (PWM)?",
+      "moznosti": [
+        "Frekvence pulzů.",
+        "Amplituda pulzů.",
+        "Šířka pulzu (doba sepnutí) při konstantní frekvenci.",
+        "Fáze pulzů."
+      ],
+      "spravna_index": 2,
+      "odpoved": "Při PWM zůstává perioda (frekvence) konstantní, mění se pouze šířka aktivního pulzu ton."
     }
   ]
 }
