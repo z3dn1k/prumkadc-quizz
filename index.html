@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prumka Quiz</title>
-    
     <style>
-        /* --- CSS STYLY --- */
+        /* --- CSS STYLY (Design: Dark Blurple) --- */
         :root {
             --bg-color: #050510;
             --card-bg: #101225;
-            --accent-color: #5865F2;
+            --accent-color: #5865F2; /* Blurple */
             --accent-hover: #4752c4;
             --text-main: #ffffff;
             --text-muted: #b9bbbe;
@@ -30,6 +29,7 @@
             min-height: 100vh;
         }
 
+        /* Navigace */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; height: 60px;
             background-color: var(--nav-bg); border-bottom: 1px solid var(--border-color);
@@ -39,68 +39,70 @@
 
         .nav-brand { font-weight: 900; font-size: 1.5rem; color: var(--accent-color); cursor: pointer; letter-spacing: 2px; }
         .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s;}
         .nav-links a:hover { color: var(--accent-color); }
 
+        /* Kontejner */
         .container { width: 100%; max-width: 800px; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
 
-        header, .subject-card, .results-card, .quiz-card {
-            background: var(--card-bg); padding: 30px; border-radius: 12px;
-            border: 1px solid var(--border-color); text-align: center; margin-bottom: 20px;
+        /* Hlavička a Karta předmětu */
+        header, .subject-card {
+            background: var(--card-bg); padding: 20px; border-radius: 12px;
+            border: 1px solid var(--border-color); text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
+        .subject-card { padding: 40px; animation: fadeIn 0.5s ease; }
 
         h1 { text-transform: uppercase; font-weight: 900; margin: 0; font-size: 2rem; color: var(--text-main); }
         .subtitle { color: var(--accent-color); font-weight: bold; margin-top: 5px; text-transform: uppercase; font-size: 0.9rem; }
+        .subject-card h1 { color: var(--accent-color); margin-bottom: 20px; }
+        .subject-card p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
 
-        /* NADPISY KATEGORIÍ */
-        .category-header {
-            text-align: left;
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-            margin-top: 40px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
+        /* Tlačítka */
         .btn-primary {
             background-color: var(--accent-color); color: white; border: none; padding: 12px 30px;
-            border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; margin-top: 10px;
+            border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s;
         }
         .btn-primary:hover { background-color: var(--accent-hover); }
 
-        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
-        #quiz-question-text { font-size: 1.4rem; margin-bottom: 30px; color: var(--text-main); text-align: left;}
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
-        .option-btn {
-            background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); padding: 15px 20px;
-            border-radius: 8px; color: var(--text-main); cursor: pointer; text-align: left; font-size: 1rem; transition: all 0.2s;
+        #reset-filter-btn {
+            background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color);
+            padding: 10px; border-radius: 5px; cursor: pointer; margin-bottom: 15px; width: 100%;
         }
-        .option-btn:hover { background: var(--accent-color); color: white; transform: translateY(-2px); border-color: var(--accent-color); }
+        #reset-filter-btn:hover { background: rgba(88, 101, 242, 0.1); }
 
-        .score-box { font-size: 1.5rem; font-weight: bold; color: var(--accent-color); margin: 20px 0 40px 0; }
-        .error-card { background: rgba(255, 0, 0, 0.1); border: 1px solid #ff4444; border-radius: 8px; padding: 15px; margin-bottom: 20px; text-align: left; }
-        .error-card h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-main); }
-        .your-answer { color: #ff6666; margin-bottom: 5px; }
-        .correct-answer { color: #66ff66; margin-bottom: 10px; font-weight: bold; }
-        .explanation { font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; font-style: italic; }
-
-        .search-box { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-main); font-size: 1rem; margin-bottom: 20px; box-sizing: border-box; }
+        /* Vyhledávání a Karty otázek */
+        .search-box {
+            width: 100%; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);
+            background: var(--card-bg); color: var(--text-main); font-size: 1rem; margin-bottom: 20px; box-sizing: border-box;
+        }
         .search-box:focus { outline: none; border-color: var(--accent-color); }
-        
-        details { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 10px; overflow: hidden; text-align: left; }
-        summary { padding: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 600; list-style: none; }
-        summary::after { content: '+'; font-size: 1.5rem; color: var(--accent-color); }
+
+        details {
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 8px; margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease;
+        }
+        details:hover { border-color: var(--accent-color); }
+        details[open] { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(88, 101, 242, 0.2); }
+
+        summary {
+            padding: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 600; list-style: none; position: relative;
+        }
+        summary::after { content: '+'; font-size: 1.5rem; color: var(--accent-color); font-weight: 300; transition: transform 0.3s; }
         details[open] summary::after { transform: rotate(45deg); }
-        
-        .badge { background: rgba(88, 101, 242, 0.2); color: var(--accent-color); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; margin-right: 12px; white-space: nowrap; }
+
+        .badge {
+            background-color: rgba(88, 101, 242, 0.2); color: var(--accent-color); padding: 4px 8px;
+            border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; margin-right: 12px; white-space: nowrap;
+        }
+        .question-text { flex-grow: 1; margin-right: 10px; }
         .answer { padding: 20px; color: var(--text-muted); line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.05); }
 
         .hidden { display: none !important; }
         footer { margin-top: 40px; text-align: center; font-size: 0.8rem; color: #555; text-transform: uppercase; }
         #loading { text-align: center; color: var(--text-muted); }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -108,8 +110,8 @@
     <nav class="navbar">
         <div class="nav-brand" onclick="goHome()">PQ</div>
         <div class="nav-links">
-            <a onclick="showSubject('ELT')">ELT</a>
-            <a onclick="showSubject('ELM')">ELM</a>
+            <a href="#" onclick="showSubject('ELT')">ELT</a>
+            <a href="#" onclick="showSubject('ELM')">ELM</a>
         </div>
     </nav>
 
@@ -128,257 +130,147 @@
             </div>
         </div>
 
-        <div id="active-quiz-view" class="hidden">
-            <div class="quiz-card">
-                <div class="quiz-header">
-                    <span class="badge" id="quiz-tema">Téma</span>
-                    <span class="progress-text">Otázka <span id="q-current">1</span> / <span id="q-total">10</span></span>
-                </div>
-                <h2 id="quiz-question-text">Otázka...</h2>
-                <div id="options-container" class="options-grid"></div>
-            </div>
-        </div>
-
-        <div id="results-view" class="hidden">
-            <div class="results-card">
-                <h2>Test Dokončen!</h2>
-                <div class="score-box">
-                    Získal jsi <span id="final-score">0</span> bodů z <span id="total-score">0</span>
-                </div>
-                <div id="wrong-answers-container"></div>
-                <button class="btn-primary" onclick="goHome()">Zpět na hlavní menu</button>
-            </div>
-        </div>
-
         <div id="quiz-view">
             <input type="text" id="searchInput" class="search-box" placeholder="Hledat téma nebo otázku...">
+            <button id="reset-filter-btn" class="hidden" onclick="goHome()">Zrušit filtr a zobrazit vše</button>
+
             <div id="loading">Načítám data...</div>
             <div id="quiz-container"></div>
         </div>
 
-        <footer>
-            &copy; 2025 - Všechno je kladivo
-        </footer>
+        <footer>&copy; 2025 - Všechno je kladivo</footer>
     </div>
 
     <script>
-        // --- KONFIGURACE ---
+        // --- KONFIGURACE PŘEDMĚTŮ ---
         const subjectData = {
-            "ELT": { title: "Elektronika (ELT)", description: "Zesilovače, OZ, Generátory." },
-            "ELM": { title: "Elektrická měření (ELM)", description: "RLC, Měření, Principy, Logika." }
+            "ELT": {
+                title: "Elektronika (ELT)",
+                description: "Zesilovače, Operační zesilovače, Generátory signálu.",
+                tags: [] 
+            },
+            "ELM": {
+                title: "Elektrická měření (ELM)",
+                description: "Laboratorní měření: RLC, Rezonance, ZAE, Logika.",
+                tags: []
+            }
         };
 
-        let kvizovaData = {}; 
-        let currentQuizQuestions = []; 
-        let currentQuestionIndex = 0;  
-        let score = 0;                 
-        let wrongAnswers = [];         
+        let kvizovaData = []; // Zde budou data načtená z JSONu
 
-        // --- 1. NAČÍTÁNÍ JSONU ---
+        // --- NAČÍTÁNÍ JSONU ---
         async function loadQuestions() {
             try {
-                // Fetchujeme soubor otazky.json
+                // Fetch na GitHub Pages funguje bez problémů
                 const response = await fetch('otazky.json');
-                if (!response.ok) throw new Error("Chyba při čtení otazky.json (Status " + response.status + ")");
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP chyba! Status: ${response.status}`);
+                }
                 
                 kvizovaData = await response.json();
-                
-                document.getElementById('loading').style.display = 'none';
-                
-                // Zobrazíme kategorie
-                renderGroupedList(kvizovaData);
+                initApp();
 
             } catch (error) {
-                console.error(error);
-                document.getElementById('loading').innerHTML = "Chyba načítání dat. Spusť přes Live Server.";
+                console.error("Chyba při načítání:", error);
+                document.getElementById('loading').innerHTML = 
+                    `<strong style="color:var(--accent-color)">Chyba načítání dat:</strong><br>${error.message}`;
             }
         }
 
-        // --- 2. LOGIKA TESTU ---
-        function startSubjectQuiz() {
-            const subjCode = document.getElementById('subject-view').dataset.currentSubject;
-            
-            if (kvizovaData[subjCode]) {
-                currentQuizQuestions = kvizovaData[subjCode];
-            } else {
-                alert("Pro tento předmět nejsou data.");
-                return;
-            }
+        // --- INICIALIZACE ---
+        function initApp() {
+            const loading = document.getElementById('loading');
+            if(loading) loading.style.display = 'none';
 
-            currentQuestionIndex = 0;
-            score = 0;
-            wrongAnswers = [];
+            // Zobrazit vše
+            renderQuestions(kvizovaData);
 
-            hideAllViews();
-            document.getElementById('active-quiz-view').classList.remove('hidden');
-
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const qData = currentQuizQuestions[currentQuestionIndex];
-
-            document.getElementById('quiz-tema').innerText = qData.tema;
-            document.getElementById('q-current').innerText = currentQuestionIndex + 1;
-            document.getElementById('q-total').innerText = currentQuizQuestions.length;
-            document.getElementById('quiz-question-text').innerText = qData.otazka;
-
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-
-            qData.moznosti.forEach((text, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = text;
-                btn.onclick = () => handleAnswer(index);
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function handleAnswer(selectedIndex) {
-            const qData = currentQuizQuestions[currentQuestionIndex];
-
-            if (selectedIndex === qData.spravna_index) {
-                score++;
-            } else {
-                wrongAnswers.push({
-                    question: qData.otazka,
-                    userChoice: qData.moznosti[selectedIndex],
-                    correctChoice: qData.moznosti[qData.spravna_index],
-                    explanation: qData.odpoved
-                });
-            }
-
-            currentQuestionIndex++;
-            if (currentQuestionIndex < currentQuizQuestions.length) {
-                showQuestion();
-            } else {
-                finishQuiz();
-            }
-        }
-
-        function finishQuiz() {
-            hideAllViews();
-            document.getElementById('results-view').classList.remove('hidden');
-
-            document.getElementById('final-score').innerText = score;
-            document.getElementById('total-score').innerText = currentQuizQuestions.length;
-
-            const wrongContainer = document.getElementById('wrong-answers-container');
-            wrongContainer.innerHTML = '';
-
-            if (wrongAnswers.length === 0) {
-                wrongContainer.innerHTML = '<h3 style="color:#66ff66">Gratulace! Všechno správně.</h3>';
-            } else {
-                wrongContainer.innerHTML = '<h3>Chyby a vysvětlení:</h3>';
-                wrongAnswers.forEach(err => {
-                    const card = document.createElement('div');
-                    card.className = 'error-card';
-                    card.innerHTML = `
-                        <h3>${err.question}</h3>
-                        <div class="your-answer">Tvoje odpověď: ${err.userChoice}</div>
-                        <div class="correct-answer">Správně: ${err.correctChoice}</div>
-                        <div class="explanation">Vysvětlení: ${err.explanation}</div>
-                    `;
-                    wrongContainer.appendChild(card);
+            // Search listener
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    filterQuestions(e.target.value);
                 });
             }
         }
 
-        // --- 3. NAVIGACE ---
+        // --- NAVIGACE ---
         function showSubject(subjCode) {
             const info = subjectData[subjCode];
+            if (!info) return;
+
             document.getElementById('subj-title').innerText = info.title;
             document.getElementById('subj-desc').innerText = info.description;
             document.getElementById('subject-view').dataset.currentSubject = subjCode;
 
-            hideAllViews();
+            document.getElementById('main-header').classList.add('hidden');
+            document.getElementById('quiz-view').classList.add('hidden');
             document.getElementById('subject-view').classList.remove('hidden');
         }
 
-        function goHome() {
-            hideAllViews();
-            document.getElementById('main-header').classList.remove('hidden');
-            document.getElementById('quiz-view').classList.remove('hidden');
+        function startSubjectQuiz() {
+            const subjCode = document.getElementById('subject-view').dataset.currentSubject;
             
-            document.getElementById('searchInput').value = "";
-            renderGroupedList(kvizovaData);
-        }
+            // Filtrování podle předmětu (ELT nebo ELM)
+            const filteredData = kvizovaData.filter(item => {
+                return item.predmet === subjCode;
+            });
 
-        function hideAllViews() {
-            document.getElementById('main-header').classList.add('hidden');
+            renderQuestions(filteredData);
+
             document.getElementById('subject-view').classList.add('hidden');
-            document.getElementById('quiz-view').classList.add('hidden');
-            document.getElementById('active-quiz-view').classList.add('hidden');
-            document.getElementById('results-view').classList.add('hidden');
+            document.getElementById('quiz-view').classList.remove('hidden');
+            document.getElementById('reset-filter-btn').classList.remove('hidden');
+            document.getElementById('searchInput').value = "";
         }
 
-        // --- 4. RENDEROVÁNÍ (Kategorie) ---
-        function renderGroupedList(data) {
+        function goHome() {
+            renderQuestions(kvizovaData);
+            document.getElementById('main-header').classList.remove('hidden');
+            document.getElementById('subject-view').classList.add('hidden');
+            document.getElementById('quiz-view').classList.remove('hidden');
+            document.getElementById('reset-filter-btn').classList.add('hidden');
+            document.getElementById('searchInput').value = "";
+        }
+
+        // --- VYKRESLOVÁNÍ ---
+        function renderQuestions(questions) {
             const container = document.getElementById('quiz-container');
             container.innerHTML = '';
 
-            for (const [predmet, otazky] of Object.entries(data)) {
-                if (!otazky || otazky.length === 0) continue;
-
-                // Nadpis kategorie
-                const header = document.createElement('h2');
-                header.className = 'category-header';
-                header.innerText = subjectData[predmet] ? subjectData[predmet].title : predmet;
-                container.appendChild(header);
-
-                // Otázky
-                otazky.forEach(item => {
-                    container.appendChild(createDetailElement(item));
-                });
-            }
-        }
-
-        function renderFlatList(questions) {
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = '';
-            
             if (!questions || questions.length === 0) {
-                container.innerHTML = '<div style="text-align:center; color:#777;">Žádné výsledky.</div>';
+                container.innerHTML = '<div style="text-align:center; color:#777; margin-top:20px;">Žádné otázky nenalezeny.</div>';
                 return;
             }
 
             questions.forEach(item => {
-                container.appendChild(createDetailElement(item));
+                const details = document.createElement('details');
+                details.innerHTML = `
+                    <summary>
+                        <div style="display:flex; align-items:center;">
+                            <span class="badge">${item.tema}</span>
+                            <span class="question-text">${item.otazka}</span>
+                        </div>
+                    </summary>
+                    <div class="answer">${item.odpoved}</div>
+                `;
+                container.appendChild(details);
             });
         }
 
-        function createDetailElement(item) {
-            const details = document.createElement('details');
-            details.innerHTML = `
-                <summary>
-                    <div style="display:flex; align-items:center;">
-                        <span class="badge">${item.tema}</span>
-                        <span class="question-text">${item.otazka}</span>
-                    </div>
-                </summary>
-                <div class="answer">${item.odpoved}</div>
-            `;
-            return details;
+        // --- HLEDÁNÍ ---
+        function filterQuestions(searchTerm) {
+            const lowerTerm = searchTerm.toLowerCase();
+            const filtered = kvizovaData.filter(item => 
+                item.otazka.toLowerCase().includes(lowerTerm) || 
+                item.tema.toLowerCase().includes(lowerTerm) ||
+                item.odpoved.toLowerCase().includes(lowerTerm)
+            );
+            renderQuestions(filtered);
         }
 
-        // Vyhledávání
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const val = e.target.value.toLowerCase();
-
-            if (val.length === 0) {
-                renderGroupedList(kvizovaData);
-            } else {
-                const allQuestions = Object.values(kvizovaData).flat();
-                const filtered = allQuestions.filter(q => 
-                    q.otazka.toLowerCase().includes(val) || 
-                    q.tema.toLowerCase().includes(val)
-                );
-                renderFlatList(filtered);
-            }
-        });
-
-        // Start
+        // Spustit
         loadQuestions();
     </script>
 </body>
