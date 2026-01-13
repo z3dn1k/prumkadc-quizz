@@ -11,6 +11,8 @@
             --card-bg: #101225;
             --accent-color: #5865F2; /* Blurple */
             --accent-hover: #4752c4;
+            --correct-color: #2ecc71;
+            --wrong-color: #e74c3c;
             --text-main: #ffffff;
             --text-muted: #b9bbbe;
             --border-color: #2f3136;
@@ -22,97 +24,133 @@
             color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding-top: 80px;
+            padding-top: 80px; 
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
 
-        /* Navigace */
+        /* --- NAVBAR --- */
         .navbar {
-            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-            background-color: var(--nav-bg); border-bottom: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 0 20px; box-sizing: border-box; z-index: 1000;
+            background-color: rgba(11, 13, 26, 0.95);
+            backdrop-filter: blur(10px);
+            height: 80px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            position: fixed;
+            top: 0; left: 0; z-index: 1000;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .nav-brand { font-weight: 900; font-size: 1.5rem; color: var(--accent-color); cursor: pointer; letter-spacing: 2px; }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; transition: color 0.3s;}
-        .nav-links a:hover { color: var(--accent-color); }
+        .navbar-logo {
+            font-size: 1.8rem; font-weight: 800; color: var(--text-main);
+            text-decoration: none; letter-spacing: -1px; cursor: pointer; transition: color 0.3s;
+        }
+        .navbar-logo span { color: var(--accent-color); }
+        .nav-links { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
 
-        /* Kontejner */
-        .container { width: 100%; max-width: 800px; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .nav-item a {
+            text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 1.1rem; 
+            padding: 10px 24px; border-radius: 12px; transition: all 0.3s ease;
+            background-color: transparent; border: 1px solid transparent;
+        }
+        .nav-item a:hover {
+            background-color: rgba(88, 101, 242, 0.15); color: var(--text-main);
+            border-color: var(--accent-color); transform: translateY(-2px);
+        }
 
-        /* Hlavička a Karta předmětu */
-        header, .subject-card {
-            background: var(--card-bg); padding: 20px; border-radius: 12px;
+        /* --- KONTEJNER --- */
+        .container { width: 100%; max-width: 800px; padding: 20px; display: flex; flex-direction: column; gap: 20px; margin-top: 20px; }
+
+        /* --- SKRÝVÁNÍ PRVKŮ --- */
+        .hidden { display: none !important; }
+
+        /* --- KARTY (Home, Subject, Game) --- */
+        header, .subject-card, .game-card, .result-card {
+            background: var(--card-bg); padding: 30px; border-radius: 12px;
             border: 1px solid var(--border-color); text-align: center;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            animation: fadeIn 0.5s ease;
         }
-        .subject-card { padding: 40px; animation: fadeIn 0.5s ease; }
 
         h1 { text-transform: uppercase; font-weight: 900; margin: 0; font-size: 2rem; color: var(--text-main); }
         .subtitle { color: var(--accent-color); font-weight: bold; margin-top: 5px; text-transform: uppercase; font-size: 0.9rem; }
+        
         .subject-card h1 { color: var(--accent-color); margin-bottom: 20px; }
         .subject-card p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
 
-        /* Tlačítka */
-        .btn-primary {
-            background-color: var(--accent-color); color: white; border: none; padding: 12px 30px;
-            border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s;
+        .btn-primary, .btn-secondary {
+            border: none; padding: 12px 30px; border-radius: 5px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.3s; margin: 5px;
         }
+        .btn-primary { background-color: var(--accent-color); color: white; }
         .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-secondary { background-color: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); }
+        .btn-secondary:hover { background-color: rgba(88, 101, 242, 0.1); }
 
-        #reset-filter-btn {
-            background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color);
-            padding: 10px; border-radius: 5px; cursor: pointer; margin-bottom: 15px; width: 100%;
+        /* --- HERNÍ UI (Kvíz) --- */
+        .progress-text { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .question-display { font-size: 1.4rem; font-weight: bold; margin-bottom: 30px; color: #fff; line-height: 1.4; }
+        
+        .options-grid {
+            display: flex; flex-direction: column; gap: 10px;
         }
-        #reset-filter-btn:hover { background: rgba(88, 101, 242, 0.1); }
 
-        /* Vyhledávání a Karty otázek */
+        .option-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 15px; border-radius: 8px; cursor: pointer;
+            text-align: left; font-size: 1rem; transition: all 0.2s;
+        }
+        .option-btn:hover:not([disabled]) {
+            background: rgba(88, 101, 242, 0.2); border-color: var(--accent-color);
+        }
+        
+        /* Stavy odpovědí */
+        .option-btn.correct { background-color: rgba(46, 204, 113, 0.2); border-color: var(--correct-color); color: var(--correct-color); }
+        .option-btn.wrong { background-color: rgba(231, 76, 60, 0.2); border-color: var(--wrong-color); color: var(--wrong-color); }
+        
+        .explanation {
+            margin-top: 20px; padding: 15px; background: rgba(88, 101, 242, 0.1);
+            border-left: 4px solid var(--accent-color); text-align: left; color: #ddd; line-height: 1.5;
+        }
+
+        /* --- SEZNAM OTÁZEK (Původní view) --- */
         .search-box {
             width: 100%; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);
             background: var(--card-bg); color: var(--text-main); font-size: 1rem; margin-bottom: 20px; box-sizing: border-box;
         }
-        .search-box:focus { outline: none; border-color: var(--accent-color); }
-
         details {
             background-color: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 8px; margin-bottom: 10px; overflow: hidden; transition: all 0.3s ease;
+            border-radius: 8px; margin-bottom: 10px; overflow: hidden;
         }
-        details:hover { border-color: var(--accent-color); }
-        details[open] { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(88, 101, 242, 0.2); }
-
-        summary {
-            padding: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 600; list-style: none; position: relative;
-        }
-        summary::after { content: '+'; font-size: 1.5rem; color: var(--accent-color); font-weight: 300; transition: transform 0.3s; }
-        details[open] summary::after { transform: rotate(45deg); }
-
-        .badge {
-            background-color: rgba(88, 101, 242, 0.2); color: var(--accent-color); padding: 4px 8px;
-            border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; margin-right: 12px; white-space: nowrap;
-        }
-        .question-text { flex-grow: 1; margin-right: 10px; }
+        summary { padding: 20px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; font-weight: 600; list-style: none; }
+        .badge { background: rgba(88, 101, 242, 0.2); color: var(--accent-color); padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; margin-right: 12px; }
         .answer { padding: 20px; color: var(--text-muted); line-height: 1.6; border-top: 1px solid rgba(255,255,255,0.05); }
 
-        .hidden { display: none !important; }
         footer { margin-top: 40px; text-align: center; font-size: 0.8rem; color: #555; text-transform: uppercase; }
         #loading { text-align: center; color: var(--text-muted); }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        @media (max-width: 600px) {
+            .navbar { padding: 0 1rem; }
+            .navbar-logo { font-size: 1.4rem; }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="nav-brand" onclick="goHome()">PQ</div>
-        <div class="nav-links">
-            <a href="#" onclick="showSubject('ELT')">ELT</a>
-            <a href="#" onclick="showSubject('ELM')">ELM</a>
-        </div>
+        <div class="navbar-logo" onclick="goHome()">Prumka<span>Quiz</span></div>
+        <ul class="nav-links">
+            <li class="nav-item"><a href="#" onclick="showSubject('ELT')">ELT</a></li>
+            <li class="nav-item"><a href="#" onclick="showSubject('ELM')">ELM</a></li>
+        </ul>
     </nav>
 
     <div class="container">
@@ -126,72 +164,71 @@
             <div class="subject-card">
                 <h1 id="subj-title">Název Předmětu</h1>
                 <p id="subj-desc">Popis předmětu...</p>
-                <button class="btn-primary" onclick="startSubjectQuiz()">Spustit test z tohoto předmětu</button>
+                <button class="btn-primary" onclick="startInteractiveQuiz()">Spustit Kvíz (Hra)</button>
+                <button class="btn-secondary" onclick="showQuestionsList()">Zobrazit seznam otázek</button>
             </div>
         </div>
 
-        <div id="quiz-view">
-            <input type="text" id="searchInput" class="search-box" placeholder="Hledat téma nebo otázku...">
-            <button id="reset-filter-btn" class="hidden" onclick="goHome()">Zrušit filtr a zobrazit vše</button>
+        <div id="game-view" class="hidden">
+            <div class="game-card">
+                <div class="progress-text" id="progress-text">Otázka 1 z 10</div>
+                <div class="question-display" id="game-question">Zde bude text otázky?</div>
+                
+                <div class="options-grid" id="game-options">
+                    </div>
 
-            <div id="loading">Načítám data...</div>
-            <div id="quiz-container"></div>
+                <div id="game-explanation" class="explanation hidden">
+                    </div>
+
+                <div style="margin-top: 20px;">
+                    <button id="next-btn" class="btn-primary hidden" onclick="nextQuestion()">Další otázka</button>
+                    <button id="quit-btn" class="btn-secondary" onclick="goHome()">Ukončit</button>
+                </div>
+            </div>
         </div>
 
+        <div id="result-view" class="hidden">
+            <div class="result-card">
+                <h1>Konec testu</h1>
+                <p id="final-score" style="font-size: 1.5rem; color: var(--text-main);">Skóre: 8/10</p>
+                <p id="final-msg" style="color: var(--text-muted);">Dobrá práce!</p>
+                <button class="btn-primary" onclick="goHome()">Zpět na menu</button>
+            </div>
+        </div>
+
+        <div id="list-view" class="hidden">
+            <input type="text" id="searchInput" class="search-box" placeholder="Hledat téma nebo otázku...">
+            <button class="btn-secondary" style="width:100%; margin-bottom:15px;" onclick="goHome()">Zpět na hlavní stranu</button>
+            <div id="list-container"></div>
+        </div>
+
+        <div id="loading">Načítám data...</div>
         <footer>&copy; 2025 - Všechno je kladivo</footer>
     </div>
 
     <script>
         // --- KONFIGURACE PŘEDMĚTŮ ---
         const subjectData = {
-            "ELT": {
-                title: "Elektronika (ELT)",
-                description: "Zesilovače, Operační zesilovače, Generátory signálu.",
-                tags: [] 
-            },
-            "ELM": {
-                title: "Elektrická měření (ELM)",
-                description: "Laboratorní měření: RLC, Rezonance, ZAE, Logika.",
-                tags: []
-            }
+            "ELT": { title: "Elektronika (ELT)", description: "Zesilovače, Zdroje, Výkonová elektronika." },
+            "ELM": { title: "Elektrická měření (ELM)", description: "Měření RLC, Rezonance, ZAE, Logika." }
         };
 
-        let kvizovaData = []; // Zde budou data načtená z JSONu
+        let kvizovaData = []; 
+        let currentQuizQuestions = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
 
-        // --- NAČÍTÁNÍ JSONU ---
+        // --- NAČÍTÁNÍ ---
         async function loadQuestions() {
             try {
-                // Fetch na GitHub Pages funguje bez problémů
                 const response = await fetch('otazky.json');
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP chyba! Status: ${response.status}`);
-                }
-                
+                if (!response.ok) throw new Error("Chyba");
                 kvizovaData = await response.json();
-                initApp();
-
+                document.getElementById('loading').style.display = 'none';
+                // Ve výchozím stavu zobrazíme všechny otázky v seznamu (pro domácí stránku)
+                renderList(kvizovaData);
             } catch (error) {
-                console.error("Chyba při načítání:", error);
-                document.getElementById('loading').innerHTML = 
-                    `<strong style="color:var(--accent-color)">Chyba načítání dat:</strong><br>${error.message}`;
-            }
-        }
-
-        // --- INICIALIZACE ---
-        function initApp() {
-            const loading = document.getElementById('loading');
-            if(loading) loading.style.display = 'none';
-
-            // Zobrazit vše
-            renderQuestions(kvizovaData);
-
-            // Search listener
-            const searchInput = document.getElementById('searchInput');
-            if(searchInput) {
-                searchInput.addEventListener('input', (e) => {
-                    filterQuestions(e.target.value);
-                });
+                document.getElementById('loading').innerHTML = "Chyba načítání dat. Zkontrolujte otazky.json.";
             }
         }
 
@@ -204,73 +241,198 @@
             document.getElementById('subj-desc').innerText = info.description;
             document.getElementById('subject-view').dataset.currentSubject = subjCode;
 
-            document.getElementById('main-header').classList.add('hidden');
-            document.getElementById('quiz-view').classList.add('hidden');
+            hideAllViews();
             document.getElementById('subject-view').classList.remove('hidden');
         }
 
-        function startSubjectQuiz() {
+        function goHome() {
+            hideAllViews();
+            document.getElementById('main-header').classList.remove('hidden');
+            document.getElementById('list-view').classList.remove('hidden'); // Na home page zobrazíme seznam všech
+            renderList(kvizovaData); // Reset filtru
+            document.getElementById('searchInput').value = "";
+        }
+
+        function hideAllViews() {
+            document.getElementById('main-header').classList.add('hidden');
+            document.getElementById('subject-view').classList.add('hidden');
+            document.getElementById('game-view').classList.add('hidden');
+            document.getElementById('result-view').classList.add('hidden');
+            document.getElementById('list-view').classList.add('hidden');
+        }
+
+        // --- HERNÍ LOGIKA (INTERAKTIVNÍ) ---
+        function startInteractiveQuiz() {
             const subjCode = document.getElementById('subject-view').dataset.currentSubject;
             
-            // Filtrování podle předmětu (ELT nebo ELM)
-            const filteredData = kvizovaData.filter(item => {
-                return item.predmet === subjCode;
-            });
-
-            renderQuestions(filteredData);
-
-            document.getElementById('subject-view').classList.add('hidden');
-            document.getElementById('quiz-view').classList.remove('hidden');
-            document.getElementById('reset-filter-btn').classList.remove('hidden');
-            document.getElementById('searchInput').value = "";
-        }
-
-        function goHome() {
-            renderQuestions(kvizovaData);
-            document.getElementById('main-header').classList.remove('hidden');
-            document.getElementById('subject-view').classList.add('hidden');
-            document.getElementById('quiz-view').classList.remove('hidden');
-            document.getElementById('reset-filter-btn').classList.add('hidden');
-            document.getElementById('searchInput').value = "";
-        }
-
-        // --- VYKRESLOVÁNÍ ---
-        function renderQuestions(questions) {
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = '';
-
-            if (!questions || questions.length === 0) {
-                container.innerHTML = '<div style="text-align:center; color:#777; margin-top:20px;">Žádné otázky nenalezeny.</div>';
+            // Vyfiltrovat otázky pro daný předmět
+            currentQuizQuestions = kvizovaData.filter(item => item.predmet === subjCode);
+            
+            // Pokud nejsou otázky, upozornit
+            if (currentQuizQuestions.length === 0) {
+                alert("Pro tento předmět nejsou v databázi žádné otázky.");
                 return;
             }
 
-            questions.forEach(item => {
+            // Zamíchat otázky (náhodné pořadí)
+            currentQuizQuestions.sort(() => Math.random() - 0.5);
+
+            currentQuestionIndex = 0;
+            score = 0;
+            
+            hideAllViews();
+            document.getElementById('game-view').classList.remove('hidden');
+            renderGameQuestion();
+        }
+
+        function renderGameQuestion() {
+            const q = currentQuizQuestions[currentQuestionIndex];
+            
+            // UI Update
+            document.getElementById('progress-text').innerText = `Otázka ${currentQuestionIndex + 1} z ${currentQuizQuestions.length}`;
+            document.getElementById('game-question').innerText = q.otazka;
+            document.getElementById('game-explanation').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+            
+            const optionsContainer = document.getElementById('game-options');
+            optionsContainer.innerHTML = '';
+
+            // Pokud otázka má definované možnosti (pole "moznosti")
+            if (q.moznosti && q.moznosti.length > 0) {
+                q.moznosti.forEach((optText, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerText = optText;
+                    btn.onclick = () => checkAnswer(idx, btn);
+                    optionsContainer.appendChild(btn);
+                });
+            } else {
+                // Pokud otázka nemá možnosti (starý formát), zobrazíme rovnou odpověď tlačítkem "Ukázat odpověď"
+                optionsContainer.innerHTML = '<p style="color:#aaa; font-style:italic;">Tato otázka nemá možnosti výběru (flashcard).</p>';
+                const revealBtn = document.createElement('button');
+                revealBtn.className = 'btn-primary';
+                revealBtn.innerText = 'Ukázat odpověď';
+                revealBtn.onclick = () => {
+                    document.getElementById('game-explanation').innerHTML = `<strong>Odpověď:</strong> ${q.odpoved}`;
+                    document.getElementById('game-explanation').classList.remove('hidden');
+                    document.getElementById('next-btn').classList.remove('hidden');
+                    revealBtn.style.display = 'none';
+                };
+                optionsContainer.appendChild(revealBtn);
+            }
+        }
+
+        function checkAnswer(selectedIndex, btnElement) {
+            const q = currentQuizQuestions[currentQuestionIndex];
+            const correctIndex = q.spravna_index;
+
+            // Zablokovat všechna tlačítka
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(b => b.disabled = true);
+
+            if (selectedIndex === correctIndex) {
+                btnElement.classList.add('correct');
+                score++;
+            } else {
+                btnElement.classList.add('wrong');
+                // Zvýraznit správnou odpověď
+                if (correctIndex !== undefined && buttons[correctIndex]) {
+                    buttons[correctIndex].classList.add('correct');
+                }
+            }
+
+            // Zobrazit vysvětlení
+            const explainBox = document.getElementById('game-explanation');
+            explainBox.innerHTML = `<strong>Správně:</strong> ${q.odpoved}`;
+            explainBox.classList.remove('hidden');
+
+            // Ukázat tlačítko Další
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < currentQuizQuestions.length) {
+                renderGameQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            hideAllViews();
+            document.getElementById('result-view').classList.remove('hidden');
+            
+            const percentage = Math.round((score / currentQuizQuestions.length) * 100);
+            document.getElementById('final-score').innerText = `Skóre: ${score} / ${currentQuizQuestions.length} (${percentage}%)`;
+            
+            let msg = "Zkus to znovu.";
+            if (percentage >= 50) msg = "Není to špatné!";
+            if (percentage >= 80) msg = "Výborná práce!";
+            if (percentage === 100) msg = "Expert!";
+            document.getElementById('final-msg').innerText = msg;
+        }
+
+        // --- LOGIKA SEZNAMU (LIST VIEW) ---
+        function showQuestionsList() {
+            const subjCode = document.getElementById('subject-view').dataset.currentSubject;
+            hideAllViews();
+            document.getElementById('list-view').classList.remove('hidden');
+            
+            const filtered = kvizovaData.filter(item => item.predmet === subjCode);
+            renderList(filtered);
+        }
+
+        function renderList(data) {
+            const container = document.getElementById('list-container');
+            container.innerHTML = '';
+            
+            if (data.length === 0) {
+                container.innerHTML = '<div style="text-align:center; color:#777;">Žádná data.</div>';
+                return;
+            }
+
+            // Seřadit podle tématu
+            data.sort((a,b) => (a.tema || "").localeCompare(b.tema || ""));
+
+            data.forEach(item => {
                 const details = document.createElement('details');
+                let extra = '';
+                if (item.moznosti) {
+                    extra = `<ul style="margin:10px 0; padding-left:20px; color:#aaa; font-size:0.9em;">
+                        ${item.moznosti.map(m => `<li>${m}</li>`).join('')}
+                    </ul>`;
+                }
+
                 details.innerHTML = `
                     <summary>
                         <div style="display:flex; align-items:center;">
-                            <span class="badge">${item.tema}</span>
+                            <span class="badge">${item.predmet || "JINÉ"}</span>
                             <span class="question-text">${item.otazka}</span>
                         </div>
                     </summary>
-                    <div class="answer">${item.odpoved}</div>
+                    <div class="answer">
+                        ${extra}
+                        <div style="margin-top:10px; border-top:1px solid #333; padding-top:10px;">
+                            <strong>Odpověď:</strong> ${item.odpoved}
+                        </div>
+                    </div>
                 `;
                 container.appendChild(details);
             });
         }
-
-        // --- HLEDÁNÍ ---
-        function filterQuestions(searchTerm) {
-            const lowerTerm = searchTerm.toLowerCase();
+        
+        // Search listener pro list view
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
             const filtered = kvizovaData.filter(item => 
-                item.otazka.toLowerCase().includes(lowerTerm) || 
-                item.tema.toLowerCase().includes(lowerTerm) ||
-                item.odpoved.toLowerCase().includes(lowerTerm)
+                item.otazka.toLowerCase().includes(term) || 
+                (item.tema && item.tema.toLowerCase().includes(term))
             );
-            renderQuestions(filtered);
-        }
+            renderList(filtered);
+        });
 
-        // Spustit
+        // Start
         loadQuestions();
     </script>
 </body>
